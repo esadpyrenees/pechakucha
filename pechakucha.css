@@ -1,0 +1,46 @@
+
+/* Styles fonctionnels */
+
+body{ margin:0; overflow:hidden; }		
+article { position:absolute; top:0; left:0; right:0; bottom:0; display:none; }
+nav { position:fixed; left:0; bottom:0; padding:10px; z-index:100; }
+.btn{ background:rgba(255,255,255,.8); margin:5px; padding:0 10px; font-size:1.5rem; line-height:1.1; color:black; float:left }
+article.visible{ display:flex; align-items: center; justify-content: center; }
+#bar { position:fixed; top:0; height:4px; background:white; }
+#bar.animated { animation:baranim 40s linear 1 forwards; }
+@keyframes baranim { 
+	0% {width:0} 
+	50% {width:100%; background:white;} 
+	55% {background:red} 
+	100% {width:100%; background:red;} 
+}
+
+/* Styles personnalisables */
+
+body{
+	font-family:sans-serif; 
+	background:#000; 
+	color:white; 
+}
+
+article {
+	text-align:center;
+	font-size:4vw;
+	background:#000; 
+}
+
+/* Taille par défaut des images et vidéos */
+img,
+video {width:calc(100% - 80px); margin:0 auto; display:block }
+
+/* Images “fullscreen” */
+.cover { width:100%; height:100%; object-fit:cover; }
+
+/* Taille du texte */
+.bigtext{ font-size:8vw; }
+.hugetext{ font-size:16vw; }
+
+/* intégration youtube, vimeo, etc. */
+.embed { position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden; width:calc(100% - 80px); margin:0 auto }
+.embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }	
+

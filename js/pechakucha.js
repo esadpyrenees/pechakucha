@@ -59,7 +59,7 @@
 	  			let embed = el.querySelectorAll('.embed')[0] || null
 	  			if (embed !== null) {
 	  				let iframe = document.createElement('iframe');
-	  				iframe.src = embed.getAttribute('rel') + '?rel=0';
+	  				iframe.src = embed.getAttribute('rel');
 	  				iframe.setAttribute('width', 854);
 	  				iframe.setAttribute('autoplay', 'true');
 	  				iframe.setAttribute('height', 480);
@@ -75,6 +75,16 @@
 	  		// Sinon
 	  		else {
 	  			el.classList.remove('visible');
+
+	  			// auto destroy iframes
+	  			let embedded = el.querySelectorAll('.embedded')[0] || null
+	  			if (embedded !== null) {
+	  				let iframe = embedded.querySelectorAll('iframe')[0];
+	  				embedded.setAttribute('rel', iframe.src);
+	  				embedded.removeChild(iframe);
+	  				embedded.className = 'embed';
+	  			}
+
 	  			// paude videos
 	  			let video = el.querySelectorAll('video')[0] || null;
 	  			if (video) video.pause();

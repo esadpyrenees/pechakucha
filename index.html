@@ -3,88 +3,93 @@
 <head>
 	<title>pechakucha !</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="pechakucha.css">
+	<link rel="stylesheet" type="text/css" href="css/pechakucha.css">
 </head>
 <body>
 	
-	<article id="article-0">
+	<article>
 		<p>pechakucha !</p>
 	</article>
-	<article id="article-1">
-		<img src="sky.png" class="cover">
+	<article>
+		<img src="media/sky.png" class="cover">
 	</article>
-	<article id="article-2">
+	<article>
+		<p class="smalltext">
+			A small-sized text paragraph, when there is a lot to say (but not too much because we’re not here to read a lot).
+		</p>
+	</article>
+	<article>
+		<p class="">
+			normal
+		</p>
+	</article>
+	<article>
 		<p class="bigtext">
 			big
 		</p>
 	</article>
-	<article id="article-3">
+	<article>
 		<p class="hugetext">
 			huge
 		</p>
 	</article>
-	<article id="article-4">
-		<div class="embed">
-			<iframe width="854" height="480" src="https://www.youtube.com/embed/deuhXlqHB9I" frameborder="0" allowfullscreen></iframe>
+	<article>
+		<div>
+			<p>multiple<br>paragraphs</p>
+			<p>wrapped<br>together</p>
 		</div>
 	</article>
-	<article id="article-5">
-		<video src="sun.webm" autoplay loop></video>
+	<article>
+		<p><a href="#">link!</a></p>
 	</article>
-	<article id="article-6">
-		<img src="sky.png">
+	<article>
+		<!-- 
+		Pour intégrer une iframe (une page d’un site, une video youtube ou vimeo) 
+		Saisir comme attribut “rel” d’un <div class="embed"> l’url du code d’intégration 
+		(ou de la page web ; mais ça ne fonctionne pas toujours)
+		-->
+		<div class="embed" rel="https://www.youtube.com/embed/deuhXlqHB9I"></div>
 	</article>
-	<article id="article-7">
-		7
+	<article>
+		<video src="media/sun.webm" loop></video>
 	</article>
-	<article id="article-8">
-		8
+	<article>
+		<img src="media/sky.png">
 	</article>
-	<article id="article-9">
-		9
+	<article>
+		…
 	</article>
-	<article id="article-10">
-		10
+	<article>
+		…
 	</article>
-	<article id="article-11">
-		11
+	<article>
+		…
 	</article>
-	<article id="article-12">
-		12
+	<article>
+		…
 	</article>
-	<article id="article-13">
-		13
+	<article>
+		…
 	</article>
-	<article id="article-14">
-		14
+	<article>
+		…
 	</article>
-	<article id="article-15">
-		15
+	<article>
+		…
 	</article>
-	<article id="article-16">
-		16
+	<article>
+		…
 	</article>
-	<article id="article-17">
-		17
+	<article>
+		…
 	</article>
-	<article id="article-18">
-		18
-	</article>
-	<article id="article-19">
-		19
-	</article>
-	<article id="article-20">
-		20
+	<article>
+		…
 	</article>
 
-	<!-- navigation -->
-
-	<nav>
-		<div class="btn" id="prev">←</div>
-		<div class="btn" id="next">→</div>
-	</nav>
+	<!-- TIMER ! -->
 	<div id="bar"></div>
 
-	<script type="text/javascript" src='pechakucha.js'></script>
+	<script type="text/javascript" src='js/pechakucha.js'></script>
 </body>
 </html>

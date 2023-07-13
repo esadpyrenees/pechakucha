@@ -1,101 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>pechakucha !</title>
+	<title>Pecha Kucha !</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/pechakucha.css">
 </head>
 <body>
-
-	<article>
-		<p>pechakucha !</p>
-	</article>
-	<article>
-		<!-- source files for local video should be mp4 or webm -->
-		<video src="media/sun.webm" loop></video>
-	</article>
-	<article>
-		<p class="smalltext">
-			A small-sized text paragraph, when there is a lot to say (but not too much because we’re not here to read a lot).
-		</p>
-	</article>
-	<article>
-		<p class="">
-			normal
-		</p>
-	</article>
-	<article>
-		<p class="bigtext">
-			big
-		</p>
-	</article>
-	<article>
-		<p class="hugetext">
-			huge
-		</p>
-	</article>
-	<article>
-		<div>
-			<!-- wrap content in a <div> when multiple elements are involved -->
-			<p>multiple<br>paragraphs</p>
-			<p>wrapped<br>together</p>
-		</div>
-	</article>
-	<article>
-		<p><a href="#">link!</a></p>
-	</article>
-	<article>
-		<!--
-		en :
-		You can embed iframes (a web page, a youtube/vimeo) :
-		Enter as attribute "rel" of a <div class="embed"> the url of the embed code
-		(or the webpage url, but it doesn't always work)
-		fr :
-		Pour intégrer une iframe (une page d’un site, une video youtube ou vimeo)
-		Saisir comme attribut “rel” d’un <div class="embed"> l’url du code d’intégration
-		(ou de la page web ; mais ça ne fonctionne pas toujours)
-		-->
-		<div class="embed" rel="https://www.youtube.com/embed/deuhXlqHB9I"></div>
-	</article>
-	<article>
-		<!-- image sources can be local -->
-		<img src="media/sky.png">
-	</article>
-	<article>
-		<!-- image sources can be remote -->
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/1.jpg" alt="">		
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/2.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/3.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/4.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/5.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/6.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/7.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/8.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/9.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/10.jpg" alt="">
-	</article>
-	<article>
-		<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/11.jpg" alt="">
-	</article>
-
+	<main class="slides">
+		<article>
+			<p>Pecha Kucha !</p>
+		</article>
+		<article>
+			<!-- source files for local video should be mp4 or webm -->
+			<video src="media/sun.webm" loop></video>
+		</article>
+		<article>
+			<div>
+				<p class="smalltext">
+					A small-sized text paragraph, when there is a lot to say (but not too much because we’re not here to read a lot).
+				</p>
+			</div>
+		</article>
+		<article>
+			<div><p class="">normal</p></div>
+		</article>
+		<article>
+			<div>
+				<p class="bigtext">big</p>
+			</div>
+		</article>
+		<article>
+			<div>
+				<p class="hugetext">huge</p>
+			</div>
+		</article>
+		<article>
+			<div>
+				<p>multiple<br>paragraphs</p>
+				<p>wrapped<br>together</p>
+			</div>
+		</article>
+		<article>
+			<p><a href="#">link!</a></p>
+		</article>
+		<article>
+			<!--
+			en :
+			You can embed iframes (a web page, a youtube/vimeo) :
+			Enter as attribute "rel" of a <div class="embed"> the url of the embed code
+			(or the webpage url, but it doesn't always work)
+			fr :
+			Pour intégrer une iframe (une page d’un site, une video youtube ou vimeo)
+			Saisir comme attribut “rel” d’un <div class="embed"> l’url du code d’intégration
+			(ou de la page web ; mais ça ne fonctionne pas toujours)
+			-->
+			<div class="embed" rel="https://www.youtube.com/embed/deuhXlqHB9I"></div>
+		</article>
+		<article>
+			<!-- image sources can be local -->
+			<img src="media/sky.png">
+		</article>
+		<article>
+			<!-- image sources can be remote -->
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/1.jpg" alt="">		
+		</article>
+		<article class="cover">
+			<!-- `cover` class makes the image cover the screen -->
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/2.jpg" alt="">
+		</article>
+		<article class="contain">
+			<!-- `contain` class makes the image be contained in the screen -->
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/3.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/4.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/5.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/6.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/7.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/8.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/9.jpg" alt="">
+		</article>
+		<article>
+			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/10.jpg" alt="">
+		</article>
+		<article>
+			<div>
+				<p>Conclusion !</p>
+			</div>
+		</article>
+	</main>
+	
 	<!-- TIMER ! -->
 	<div id="bar"></div>
 

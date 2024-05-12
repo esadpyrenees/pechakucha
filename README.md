@@ -139,4 +139,5 @@ Then, you can run it:
 
 [Markdown-it](https://github.com/markdown-it/markdown-it) is © Vitaly Puzrin + Alex Kocharin and is released under MIT Licence.
 
-Written by [Julien Bidoret](https://accentgrave.net), everything else is released under Public domain via [Unlicence](https://unlicense.org).
+`genpdf.sh` by Yann Trividic, and everything else by [Julien Bidoret](https://accentgrave.net) is released under Public domain via [Unlicence](https://unlicense.org).
+

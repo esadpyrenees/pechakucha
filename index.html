@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pecha Kucha !</title>
+	<title>Pecha Kucha !</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/pechakucha.css">
 </head>
 <body>
 	<main class="slides">
-		<article>
-			<p>Pecha Kucha !</p>
+		<article class="red blacktext">
+			<h1>Pecha Kucha !</h1>
 		</article>
-		<article>
-			<!-- source files for local video should be mp4 or webm -->
-			<video src="media/sun.webm" loop></video>
+		<article class="orange">
+			<p class="">Normal</p>
 		</article>
-		<article>
-			<div>
-				<p class="smalltext">
-					A small-sized text paragraph, when there is a lot to say (but not too much because we’re not here to read a lot).
-				</p>
-			</div>
+		<article class="red">			
+			<p class="bigtext">Big</p>			
 		</article>
-		<article>
-			<div><p class="">normal</p></div>
+		<article class="graygreen">
+			<p class="hugetext">Huge</p>
 		</article>
-		<article>
-			<div>
-				<p class="bigtext">big</p>
-			</div>
+		<article class="pink">			
+			<p class="smalltext">
+				A small-sized text paragraph, when there is a lot to say (but not too much because we’re not here to read a lot).
+			</p>			
 		</article>
-		<article>
-			<div>
-				<p class="hugetext">huge</p>
-			</div>
+		<article class="green">
+			<p>multiple<br>paragraphs</p>
+			<p>wrapped<br>together</p>
 		</article>
-		<article>
-			<div>
-				<p>multiple<br>paragraphs</p>
-				<p>wrapped<br>together</p>
-			</div>
-		</article>
-		<article>
+		<article class="stone blacktext">
 			<p><a href="#">link!</a></p>
 		</article>
-		<article>
+		<article class="cover darkgray">
+			<!-- source files for local video should be mp4 or webm -->
+			<p><video src="media/sun.webm" loop></video></p>
+			<p><span>Here comes the sun</span></p>
+		</article>
+		<article class="powder">
 			<!--
 			en :
 			You can embed iframes (a web page, a youtube/vimeo) :
@@ -56,19 +49,19 @@
 			-->
 			<div class="embed" rel="https://www.youtube.com/embed/deuhXlqHB9I"></div>
 		</article>
-		<article>
+		<article class="blue">
 			<!-- image sources can be local -->
 			<img src="media/sky.png">
 		</article>
-		<article>
+		<article class="paleblue">
 			<!-- image sources can be remote -->
 			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/1.jpg" alt="">		
 		</article>
-		<article class="cover">
+		<article class="cover purple">
 			<!-- `cover` class makes the image cover the screen -->
 			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/2.jpg" alt="">
 		</article>
-		<article class="contain">
+		<article class="contain pink">
 			<!-- `contain` class makes the image be contained in the screen -->
 			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/3.jpg" alt="">
 		</article>
@@ -93,10 +86,8 @@
 		<article>
 			<img src="http://ateliers.esad-pyrenees.fr/_inc/img/750/10.jpg" alt="">
 		</article>
-		<article>
-			<div>
-				<p>Conclusion !</p>
-			</div>
+		<article class="red">
+			<p>Conclusion !</p>			
 		</article>
 	</main>
 	

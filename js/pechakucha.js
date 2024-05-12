@@ -1,32 +1,70 @@
 // ぺちゃくちゃ
 
-const articles = document.querySelectorAll('article');
-const bar = document.getElementById('bar');
-let timer = null,
-	displaygrid = false,
-	basesize = 4,
-	idx = 0,
-	has_started = false;
 
-// affichage du premier article
-articles[0].classList.add('visible');
+const articles = []; // a list to contain all slides
+const bar = document.getElementById('bar'); // timer bar
 
-// attribution d’un id et d’un attribut “data-id” à chaque article
-articles.forEach(function(article, index){
-	article.id = "article-" + index;
-	article.dataset.id = index;
-	initGridActions(article);
-})
+// initial state vraiables
+let timer = null, // timer
+	displaygrid = false, // initial view : grid or slide 
+	basesize = 4, // font size
+	idx = 0, // slide index
+	pechakucha_timer_mode = true, // timer bar runs at every slide
+	timer_duration = 30 * 60, // total duration used when setting pechakucha_timer_mode to false, in seconds
+	has_started = false; // :)
 
 
-// navigation au clavier (flèches directionelles)
+// HTML markup slides (see markdown.html to activate markdown mode)
+if(document.body.dataset.source === undefined) {
+	// populate slides list
+	articles.push(...document.querySelectorAll('article'));
+	// go !
+	initPechaKucha();
+}
+
+// ------------------------------------------------------- Init function
+function initPechaKucha(){
+  // affichage du premier article
+  articles[0].classList.add('visible');
+
+  // attribution d’un id et d’un attribut “data-id” à chaque article
+  articles.forEach(function(article, index){
+    article.id = "article-" + index;
+    article.dataset.id = index;
+    initGridActions(article);
+  })
+
+  // rafraichissement de page
+  if(window.location.hash) {
+    let myidx = window.location.hash.replace("#article-", '')
+    let article = document.querySelector(window.location.hash)
+    idx = Array.prototype.indexOf.call(articles, article) - 1;
+    changeSlide('right');
+  }
+
+	// trigger hide mouse
+	hideMouse()
+}
+
+// ------------------------------------------------------- Hide mouse
+function hideMouse(){
+	setTimeout(() => {
+		document.body.style.cursor = "none";
+	}, 1000);
+}
+
+document.body.onmousemove = () => {
+	document.body.style.cursor = "unset";
+	hideMouse();
+}
+
+// ------------------------------------------------------- Keyboard nav
 document.body.onkeydown = function(e){
-
 	if (e.key == "ArrowLeft") changeSlide('left');
 	if (e.key == "ArrowRight") changeSlide('right');
 	if (e.key == "Enter") start();
-	if (e.key == "Escape") toggleGrid();      
-	
+	if (e.key == "Escape" || e.key == " ") toggleGrid();      
+	// typeface zoom
 	if (e.key == "+") {
 		basesize += .1;
 		document.body.style.setProperty('--basesize', basesize + "vw")
@@ -38,23 +76,22 @@ document.body.onkeydown = function(e){
 };
 
 
-// rafraichissement de page
-if(window.location.hash) {
-	let myidx = window.location.hash.replace("#article-", '')
-	let article = document.querySelector(window.location.hash)
-	idx = Array.prototype.indexOf.call(articles, article) - 1;
-	changeSlide('right');
-}
-
-
+// ------------------------------------------------------- Start timer and slideshow
 function start(){
 	if(!has_started){
-		toggleFullScreen();		
+		toggleFullScreen("on");		
+		changeSlide('right');
+		if(bar && !pechakucha_timer_mode) {
+			let duration = timer_duration || 20 * 20;
+			bar.style.setProperty('--duration', duration + "s");
+			bar.classList.add('animated');
+		}
+		has_started = true;
 	}
-	changeSlide('right');
 }
 
-// toggle grid
+
+// ------------------------------------------------------- Toggle grid
 function toggleGrid() {
 	let body = document.body;
 	if (!displaygrid) {
@@ -66,12 +103,13 @@ function toggleGrid() {
 	}
 }
 
-// grid actions
+// ------------------------------------------------------- Grid actions
 function initGridActions(article){
 	// en mode grille, au clic sur un article, quitte le mode grille et affiche cet article  
 	article.addEventListener('click', () => {
 		if(displaygrid == true) {
-			document.querySelector('.visible').classList.remove("visible");
+			let v = document.querySelector('.visible');
+			if(v) v.classList.remove("visible");
 			toggleGrid();
 			article.classList.add('visible');
 			idx = parseInt(article.dataset.id) - 1;
@@ -80,13 +118,14 @@ function initGridActions(article){
 	})
 }
 
-// Full screen
+// ------------------------------------------------------- Full screen
 document.body.ondblclick = function (e) {
 	toggleFullScreen();
 };
-
-function toggleFullScreen() {
-	if (!document.fullscreenElement) {
+function toggleFullScreen(onoff) {
+	// should we go FS ?
+	const to_fullscreen = onoff == "on" ? true : !document.fullscreenElement;
+	if (to_fullscreen) {
 		document.documentElement.requestFullscreen();
 	} else {
 		if (document.exitFullscreen) {
@@ -95,10 +134,10 @@ function toggleFullScreen() {
 	}
 }
 
-// changement de slide
+// ------------------------------------------------------- Switch slides
 function changeSlide(direction){
 	
-		// quelle direction ?
+		// wich direction ?
 		if (direction == 'right') {
 			idx = idx == articles.length - 1 ? 0 : idx + 1;
 		} else {
@@ -106,30 +145,33 @@ function changeSlide(direction){
 		}
 
 		// restart timer animation
-		bar.classList.remove('animated');
-		void bar.offsetWidth;
-		if(idx != 0){
-			bar.classList.add('animated');
+		// (if bar exists)
+		if(bar && pechakucha_timer_mode){
+			bar.classList.remove('animated');
+			void bar.offsetWidth;
+			if(idx != 0){
+				bar.classList.add('animated');
+			}
 		}
 
 		// check each article
 		articles.forEach(function(el, index, array){
 
-			// Si c’est la slide qu’on veut afficher
+			// New slide
 			if (index == idx) {
 				el.classList.add('visible');
 
-				// change le “hash” dans l’URL
+				// change “hash” in URL
 				history.pushState(null, el.id, '#' + el.id);
 
 				// auto build iframes
-				let embed = el.querySelectorAll('.embed')[0] || null
+				let embed = el.querySelectorAll('.embed')[0] || null
 				if (embed !== null) {
 					let iframe = document.createElement('iframe');
 					iframe.src = embed.getAttribute('rel');
 					iframe.setAttribute('width', 854);
-					iframe.setAttribute('autoplay', 'true');
 					iframe.setAttribute('height', 480);
+					iframe.setAttribute('autoplay', 'true');
 					iframe.setAttribute('frameborder', 0);
 					embed.appendChild(iframe);
 					embed.className = 'embedded';
@@ -139,12 +181,13 @@ function changeSlide(direction){
 				let video = el.querySelectorAll('video')[0] || null;
 				if (video) video.play();
 			}
-			// Sinon…
+
+			// Other slides
 			else {
 				el.classList.remove('visible');
 
 				// auto destroy iframes
-				let embedded = el.querySelectorAll('.embedded')[0] || null
+				let embedded = el.querySelectorAll('.embedded')[0] || null;
 				if (embedded !== null) {
 					let iframe = embedded.querySelectorAll('iframe')[0];
 					embedded.setAttribute('rel', iframe.src);

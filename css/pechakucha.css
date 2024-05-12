@@ -1,22 +1,51 @@
 
 /* ------------------------------------------------------------------ Styles fonctionnels */
+*, *::before,*::after{ box-sizing: border-box; }
 body{ margin:0; overflow:hidden; }
-article { position:absolute; inset:0; display:none; }
-article.visible{ display:flex; align-items: center; justify-content: flex-start; }
-#bar { position:fixed; bottom:0; height:2px; background:white; }
-#bar.animated { animation:baranim 30s linear 1 forwards; }
-@keyframes baranim {
-	0% {width:0}
-	66.666% {width:100%; background: white;}
-	100% {width:100%; background: red;}
-}
 
 
 /* ------------------------------------------------------------------ Styles personnalisables */
 :root {
-	--padding: 40px;
+  /* font-size & spacing */
+	--spacing: 40px;
   --basesize: 4vw;
+  /* colors */
+  --paleblue: #BEE1F0;
+	--pink: #AF96DC;
+	--stone: #E8CEAB;
+	--powder: #F8D0C7;
+	--yellow: #FDD652;
+	--orange: #FF5B13;
+	--red: #EF2814;
+	--marroon: #855A3C;
+	--kaki: #928505;
+	--graygreen: #B0B685;
+	--green: #00B25B;
+	--blue: #1997D7;
+	--purple: #7d5bed;
+  /* grays */
+	--gray: #BEBEBE;
+  --darkgray: #333;
+  /* variable background color */
+  --bgcolor:black;
 }
+
+.paleblue {background: var(--paleblue); --bgcolor:var(--paleblue)}
+.pink {background: var(--pink); --bgcolor:var(--pink)}
+.gray {background: var(--gray); --bgcolor:var(--gray)}
+.stone {background: var(--stone); --bgcolor:var(--stone)}
+.powder {background: var(--powder); --bgcolor:var(--powder)}
+.yellow {background: var(--yellow); --bgcolor:var(--yellow)}
+.orange {background: var(--orange); --bgcolor:var(--orange)}
+.red {background: var(--red); --bgcolor:var(--red)}
+.marroon {background: var(--marroon); --bgcolor:var(--marroon)}
+.kaki {background: var(--kaki); --bgcolor:var(--kaki)}
+.graygreen {background: var(--graygreen); --bgcolor:var(--graygreen)}
+.green {background: var(--green); --bgcolor:var(--green)}
+.blue {background: var(--blue); --bgcolor:var(--blue)}
+.purple {background: var(--purple); --bgcolor:var(--purple)}
+.darkgray {background: var(--darkgray); --bgcolor:var(--darkgray)}
+
 @font-face {
   font-family: "Ecole";
   src: url("fonts/Ecole-Italic.woff2") format("woff2");
@@ -44,34 +73,89 @@ body{
 	color:#000;
 }
 article {
-	text-align:left;
-	font-size: var(--basesize);
-	background:#000;
+  position:absolute; 
+  inset:0; 
+	padding: var(--spacing);
+  background:#000;
 	color: white;
-	padding: var(--padding);
+  text-align:left;
+	font-size: var(--basesize);
 	line-height: 1.25;
+  text-wrap: balance;
+  flex-direction: column;
+  display:none; 
 }
 
-a { color: white; }
-p { max-width: 27em; }
+article.visible{ 
+  display:flex; 
+  align-items: flex-start; 
+  justify-content: flex-start; 
+}
+
+article > * { margin: 0; }
+
+a { color: currentColor; }
+p { max-width: 20em; }
+
 
 /* Taille par défaut des images et vidéos */
-img {max-width:100%; max-height:100%; margin:0; display:block }
-video {width:100%; height:100%; object-fit:contain; margin:0 auto; display:block }
+/* Taille par défaut des images et vidéos */
+img, video, iframe { 
+  border: none;
+  max-width:100%; 
+  max-height:100%; 
+  margin:0; 
+  display:block;
+  position: absolute;
+  inset: var(--spacing);
+  object-fit: contain;
+  z-index: 8;
+  height: calc(100% - var(--spacing) * 2);
+  width: calc(100% - var(--spacing) * 2);
+  object-position: right center;
+}
+video,
+iframe{ width: auto; aspect-ratio: 4/3; inset: unset; right: var(--spacing); top: var(--spacing); position: absolute;}
+iframe { background: white; }
+video { aspect-ratio: 16/9;}
 
 /* Images “fullscreen” */
-.cover img, .cover video { width:100%; height:100%; object-fit:cover; }
-.contain img, .contain video { width:100%; height:100%; object-fit:contain; }
+.cover img, .cover video, .cover iframe { width:100%; height:100%; object-fit:cover; inset:0 }
 
 /* Taille du texte */
-.smalltext{ font-size:1em; line-height:1.4}
-.bigtext{ font-size:2.5em; line-height:1.1}
-.hugetext{ font-size:5em; line-height:1}
+small, .smalltext{ font-size: calc(.75 * var(--basesize)); line-height:1.4}
+h2, .bigtext{ font-size: calc(1.5 * var(--basesize)); line-height:1.1}
+h1, .hugetext{ font-size: calc(2.5 * var(--basesize)); line-height:1}
+
+/* Text color */
+.blacktext {color: black;}
+.whitetext {color: white;}
 
 /* intégration youtube, vimeo, etc. */
-.embedded {	background: white; position: absolute; inset: var(--padding);}
+.embedded {	background: white; position: absolute; inset: var(--spacing);}
 .embedded iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
 
+
+/* background-color on text content (when following img, video or iframe) */
+article p:has(img) ~ *,
+article p:has(video) ~ *,
+article iframe ~ * {
+  position: relative;
+  z-index: 10;
+}
+article p:has(img) ~ * span,
+article p:has(video) ~ * span,
+article:has(iframe) * span {
+  background: var(--bgcolor, black);
+  border-radius: .5em;
+  box-decoration-break: clone;
+  padding: .05em .25em;
+}
+/* trick to put last paragraph at the bottom */
+article p:last-of-type:not(p:first-child){
+  position: absolute;
+  bottom: calc(var(--spacing) * 2);
+}
 
 /* ------------------------------------------------------------------ Vue grille */
 .grid {
@@ -90,17 +174,14 @@ video {width:100%; height:100%; object-fit:contain; margin:0 auto; display:block
 
 .grid article {
   display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
   position: relative;
   overflow: hidden;
-  background: black;
   aspect-ratio: 16 / 9;
   padding: 1em !important;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  color: white; 
 }
-
 
 .grid article::after {
   position: absolute;
@@ -109,9 +190,12 @@ video {width:100%; height:100%; object-fit:contain; margin:0 auto; display:block
   font-size: 18px;
   content: attr(data-id);
   background: black;
+  color: white; 
   width: 3ch;
   text-align: center;
   empty-cells: 3; 
+  line-height: 1.5;
+  z-index: 100;
 }
 
 .grid .embed { align-self: center; }
@@ -125,7 +209,7 @@ video {width:100%; height:100%; object-fit:contain; margin:0 auto; display:block
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   font-size: 2em;
   padding: 2em;
   word-break: break-all;
@@ -133,12 +217,55 @@ video {width:100%; height:100%; object-fit:contain; margin:0 auto; display:block
   color: yellow; 
 }
 
+/* ------------------------------------------------------------------ Timer animation */
+
+#bar { 
+  position:fixed; 
+  bottom:0; 
+  height:2px; 
+  width:0;
+  background:white; 
+}
+#bar.animated { 
+  /* triggered at every slide change in pechakucha mode */
+  animation:baranim var(--duration, 20s) linear 1 forwards; 
+}
+@keyframes baranim {
+	100% {width:100%; }
+}
+
 
 /* ------------------------------------------------------------------ Print / PDF */
 @media print {
   @page {
     margin: 0;
-    size: A4 landscape;
+    size: 29.7cm 21cm;
+    margin: 1cm;
+    
+  }
+  body {
+    --basesize: 14pt;
+    --spacing: .5cm;
+    overflow: auto;
+    margin: 0;
+  }
+  main {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* hardcoded height… */
+    grid-template-rows: 9cm;
+    gap: 1cm; 
+  }
+  article {
+    position: relative;
+    inset: unset;
+    display: flex;
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    margin: 0;
+    /* hardcoded height… */
+    height: 9cm;
   }
   #bar  { display: none; }
   .embedded::before {
@@ -151,5 +278,29 @@ video {width:100%; height:100%; object-fit:contain; margin:0 auto; display:block
     background: #000;
     padding: .5em .75em;
     font-size: .5em;
+  }
+}
+
+
+/* ------------------------------------------------------------------ Repsonsive mobile (portrait) view */
+@media (orientation:portrait) and (media:scren) {
+  main {
+    scroll-snap-type: y mandatory;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  article { 
+    scroll-snap-align: start;
+    position:relative; inset:unset; height: 100vh; display:flex; align-items: flex-start-start; justify-content: flex-start; }
+  article::before{
+    content:"" ;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,.4);
+    left: calc(-1 * var(--spacing));
+    right: calc(-1 * var(--spacing));
+    width: calc(100% + var(--spacing) * 2);
+    bottom: 0;
+    position: absolute;
   }
 }

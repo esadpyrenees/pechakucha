@@ -33,7 +33,7 @@ do
   printf "Processing page $c ($pdf)\n"
   urlarticle="$url/index.html#article-$c"
   pdfs="$pdfs $tmpfolder/$pdf"
-  chromium-browser --headless=new --disable-software-rasterizer --run-all-compositor-stages-before-draw --disable-force-compositing-mode --disable-gpu --no-margins --no-pdf-header-footer --print-to-pdf=$tmpfolder/$pdf $urlarticle
+  chromium-browser --headless=new --disable-software-rasterizer --disable-lazy-loading --enable-chrome-browser-cloud-management --run-all-compositor-stages-before-draw --disable-force-compositing-mode --disable-gpu --no-margins --no-pdf-header-footer --print-to-pdf=$tmpfolder/$pdf $urlarticle
 done
 
 # merge the temp files with pdfunite:

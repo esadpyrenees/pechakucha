@@ -270,7 +270,7 @@ article p:last-of-type:not(p:first-child){
   #bar  { display: none; }
   .embedded::before {
     content: attr(rel);
-    z-index: 2;
+    z-index: 1000;
     position: absolute;
     bottom: 0;
     left: 0;

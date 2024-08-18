@@ -75,6 +75,17 @@ document.body.onkeydown = function(e){
 	}
 };
 
+// ------------------------------------------------------- Basic touchscreen nav
+document.body.ontouchstart = function(e){
+	var touch = e.touches[0];
+	x = touch.pageX;
+	console.log(x);
+	if(x < window.screen.width / 2) {
+		changeSlide('left');
+	} else {
+		changeSlide('right');
+	}
+}
 
 // ------------------------------------------------------- Start timer and slideshow
 function start(){

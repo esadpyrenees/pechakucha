@@ -160,44 +160,69 @@ function changeSlide(direction){
 			// New slide
 			if (index == idx) {
 				el.classList.add('visible');
-
 				// change “hash” in URL
 				history.pushState(null, el.id, '#' + el.id);
-
-				// auto build iframes
-				let embed = el.querySelectorAll('.embed')[0] || null
-				if (embed !== null) {
-					let iframe = document.createElement('iframe');
-					iframe.src = embed.getAttribute('rel');
-					iframe.setAttribute('width', 854);
-					iframe.setAttribute('height', 480);
-					iframe.setAttribute('autoplay', 'true');
-					iframe.setAttribute('frameborder', 0);
-					embed.appendChild(iframe);
-					embed.className = 'embedded';
-				}
-
-				// autoplay videos
-				let video = el.querySelectorAll('video')[0] || null;
-				if (video) video.play();
 			}
 
 			// Other slides
 			else {
 				el.classList.remove('visible');
-
-				// auto destroy iframes
-				let embedded = el.querySelectorAll('.embedded')[0] || null;
-				if (embedded !== null) {
-					let iframe = embedded.querySelectorAll('iframe')[0];
-					embedded.setAttribute('rel', iframe.src);
-					embedded.removeChild(iframe);
-					embedded.className = 'embed';
-				}
-
-				// pause videos
-				let video = el.querySelectorAll('video')[0] || null;
-				if (video) video.pause();
 			}
 		})
 }
+
+
+// reset embeds and pause video on leaving slide
+function resetEmbeds(el) {
+	let embedded = el.querySelectorAll('.embedded')[0] || null;
+	if (embedded !== null) {
+		let iframe = embedded.querySelectorAll('iframe')[0];
+		embedded.setAttribute('rel', iframe.src);
+		embedded.removeChild(iframe);
+		embedded.className = 'embed';
+	}
+
+	// pause videos
+	let video = el.querySelectorAll('video')[0] || null;
+	if (video) video.pause();
+	
+}
+
+// init embeds and play video on entering slide
+function initEmbeds(el) {
+	let embed = el.querySelectorAll('.embed')[0] || null
+	if (embed !== null) {
+		let iframe = document.createElement('iframe');
+		iframe.src = embed.getAttribute('rel');
+		iframe.setAttribute('width', 854);
+		iframe.setAttribute('height', 480);
+		iframe.setAttribute('autoplay', 'true');
+		iframe.setAttribute('frameborder', 0);
+		embed.appendChild(iframe);
+		embed.className = 'embedded';
+	}
+
+	// autoplay videos
+	let video = el.querySelectorAll('video')[0] || null;
+	if (video) video.play();
+}
+
+
+// observe slide/viewport intersection to handle embeds
+function handleIntersection(articles) {
+  articles.map((entry) => {
+    const el = entry.target;
+    if (entry.isIntersecting) {     
+      initEmbeds(el);
+		} else {
+			resetEmbeds(el);
+    }
+  });
+}
+
+const observer = new IntersectionObserver(handleIntersection);
+
+articles.forEach(article => {
+  observer.observe(article);
+});
+

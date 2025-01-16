@@ -1,3 +1,7 @@
+This project has been moved to Codeberg: https://codeberg.org/julienbidoret/pechakucha
+
+Please update your bookmarks!
+
 # Pecha Kucha
 
 Pechakucha or Pecha Kucha (from Japanese ペ チ ャ ク チ ャ: “chat”, “conversation sound”) is a format synchronizing an oral presentation to the projection of 20 slides successively every 20 seconds, preferably without animation effects. The presentation thus lasts exactly 6 minutes and 40 seconds. This format imposes eloquence, a sense of storytelling, rythm, conciseness, as well as graphic expression.

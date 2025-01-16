@@ -283,16 +283,17 @@ article p:last-of-type:not(p:first-child){
 
 
 /* ------------------------------------------------------------------ Repsonsive mobile (portrait) view */
+
 @media (orientation:portrait) and (media:scren) {
   main {
     scroll-snap-type: y mandatory;
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 100vh;
+    height: 100dvh;
   }
   article { 
     scroll-snap-align: start;
-    position:relative; inset:unset; height: 100vh; display:flex; align-items: flex-start-start; justify-content: flex-start; }
+    position:relative; inset:unset; min-height: 100dvh; display:flex; align-items: flex-start-start; justify-content: flex-start; }
   article::before{
     content:"" ;
     display: block;
@@ -302,5 +303,15 @@ article p:last-of-type:not(p:first-child){
     width: calc(100% + var(--spacing) * 2);
     bottom: 0;
     position: absolute;
+  }
+  .smalltext {
+    font-size: calc(.75 * var(--basesize));
+  }
+}
+
+@media (max-width:450px) {
+  :root {
+    --basesize: 16px;
+    --spacing: 20px
   }
 }
